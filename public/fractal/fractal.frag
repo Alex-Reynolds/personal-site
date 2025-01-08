@@ -22,9 +22,9 @@ void main() {
 
     // Apply zoom by scaling coordinates
     c *= zoom;
-
-    // Define rotation angle (in radians, based on time to animate it)
-    float angle = u_scroll;  // Rotate over time
+    // Calculate rotation angle, incorporating screen aspect ratio correction
+    float aspectRatio = u_resolution.x / u_resolution.y;
+    float angle = u_scroll + atan(1.0 / aspectRatio); // Rotate based on aspect ratio
 
     // 2D rotation matrix
     mat2 rotationMatrix = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));

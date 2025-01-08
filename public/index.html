@@ -4,45 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>p5.js in Node Project</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="style.css">
+    <link 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+      rel="stylesheet" 
+      integrity="sha384-rbsA2VBKQ1bweKlgE7qIWuNxIGD03J1u5GzE5GLghGmbjrnwhCEnr392u2O3sI1R" 
+      crossorigin="anonymous">
   </head>
   <body>
     <main>
-      <main>
+      <div class="first-page">
         <!-- Top-left section for name and bio -->
-        <div class = firstPage>
         <div class="top-left">
           <img src="images/websiteProfileImage.jpg" alt="Profile" class="profile-image">
           <h1>Hi, I am Alex</h1>
-          <p>I have a passion for technology, problem solving, and fitness. In my free time, I enjoy exercising or playing disc golf, chess, or video games with my friends.
+          <p>
+            I have a passion for technology, problem solving, and fitness. In my free time, I enjoy exercising or playing disc golf, chess, or video games with my friends.
           </p>
-          <br>
           <hr>
-          <br>
-          <p>PS: I built this site in one night for fun as a way to experiment with shaders for the first time, so it's not designed to work well on mobile or with different page magnification levels (I may add that later).
+          <p>
+            PS: I built this site in one night for fun as a way to experiment with shaders for the first time, so it's not designed to work well on mobile or with different page magnification levels (I may add that later).
           </p>
         </div>
-  
+
         <!-- Bottom-right section for image and content -->
         <div class="bottom-right">
           <img src="images/icpcGoofy.jpg" alt="ICPC NAC" class="content-image">
-          <p>2022 International Collegiate Programming Content, North America Championship
-          </p>
-          <br>
+          <p>2022 International Collegiate Programming Contest, North America Championship</p>
           <hr>
-          <br>
           <p>
             Despite not yet taking upperclassman courses in algorithms, I was still recruited to represent Iowa State University on the national stage for competitive programming. ICPC NAC was by far the most fun competition I have ever competed in. If it weren't for studying abroad and work requirements, I definitely would have competed again as an upperclassman with more skills :)
           </p>
         </div>
       </div>
-      <div id="game-container"></div>
+      <div class="second-page">
+        
+      </div>
+      <div id="background-container"></div>
     </main>
+
     <!-- Include p5.js from node_modules -->
     <script src="/node_modules/p5/lib/p5.min.js"></script>
     <script src="/node_modules/p5/lib/addons/p5.sound.min.js"></script>
-    <!-- Your custom p5.js sketch <script type="module" src="main.js"></script><script type="module" src="shader.js"></script>-->
     
+    <!-- Your custom p5.js sketches -->
     <script type="module" src="background/backgroundShader.js"></script>
   </body>
 </html>
