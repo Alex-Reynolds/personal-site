@@ -25,7 +25,6 @@ void main() {
 
     // Define rotation angle (in radians, based on time to animate it)
     float angle = u_scroll;  // Rotate over time
-
     // 2D rotation matrix
     mat2 rotationMatrix = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
 

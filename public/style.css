@@ -1,88 +1,105 @@
-/* General reset */
-* {
+html, body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: #fff;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Top-left section */
-.top-left {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  padding: 20px;
-  background-color: white;
-  color: black;
-  border-radius: 15px;
-  max-width: 35%;  /* Ensure content stays within the first half of the page */
-  word-wrap: break-word;
-}
-
-.top-left h1 {
-  font-size: 3rem; /* Doubled heading font size */
-  margin-bottom: 10px;
-}
-
-.top-left p {
-  font-size: 1.5rem; /* Doubled paragraph font size */
-}
-
-/* Bottom-right section */
-.profile-image {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-.content-image {
-  width: 100%; /* Adjust the width to control the amount cropped */
-  height: auto; /* Keeps the aspect ratio intact */
-  border-radius: 10px;
-  margin-bottom: 10px;
-  object-fit: cover; /* Ensures the image covers the area without stretching */
-  overflow: hidden; /* Crops the excess image */
-}
-
-.bottom-right {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background-color: black;
-  color: white;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  max-width: 35%; /* Increased width */
-  width: 100%;  /* Allows flexibility for scaling */
-}
-
-.bottom-right h1 {
-  font-size: 3rem; /* Doubled heading font size */
-}
-
-.bottom-right p {
-  font-size: 1.5rem; /* Doubled paragraph font size */
-}
-
-/* Optional styling for diagonal separation */
-body::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, #000 50%, #fff 50%);
-  z-index: -1;
+}
+
+.movingBackground {
+  position: static !important;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Place the canvas behind other elements */
+}
+.image-wrapper {
+  width: 100%;
+  height: 100%; /* Set a fixed height for the image container */
+  overflow: hidden; /* Hide overflow */
+  padding: 15px; /* Add padding around the image */
+  box-sizing: border-box; /* Include padding in the width and height calculations */
+}
+div {
+  line-height: 0;
+}
+.nav-link {
+  list-style: none;
+  box-sizing: border-box;
+  display: block;
+  background: none;
+  border: 0;
+  padding: 0!important;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 25px 20px 0;
+  background-color: transparent;
+  transition: all .2s ease;
+  color: #393f49;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.nav-link:hover {
+  list-style: none;
+  box-sizing: border-box;
+  display: block;
+  background: none;
+  border: 0;
+  padding: 0!important;
+  --bs-link-color-rgb: var(--bs-link-hover-color-rgb);
+  text-decoration: none;
+  cursor: pointer;
+  margin: 25px 20px 0;
+  background-color: transparent;
+  transition: all .2s ease;
+  font-weight: 500;
+  font-size: 18px;
+  color: #c08261;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding: 0!important;
+  position: sticky !important;
+  z-index: 9999;
+  left: 0;
+  right: 0;
+  background-color: #dbd8d580;
+  transition: top .3s ease;
+  backdrop-filter: blur(30px);
+  top: 0px;
+  
+}
+
+
+
+.hr {
+  list-style: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 18px;
+  box-sizing: border-box;
+  color: inherit;
+  opacity: 1;
+  border: 1px solid transparent;
+  width: 0%;
+  margin: 20px auto 0;
+  border-radius: 200px;
+  transition: all .2s ease;
+}
+
+
+
+.content-card {
+  max-height: 40vh;
+}
+
+.profile-image,
+.content-image {
+  width: 150px; /* Set a fixed width */
+  height: 150px; /* Set a fixed height */
+  object-fit: cover; /* Crop the image to cover the area without distorting */
+  border-radius: 10px; /* Smooth corners */
 }

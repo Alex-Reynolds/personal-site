@@ -1,39 +1,67 @@
-let shaderProgram;
-let canvas;
-let scrollValue = 0.0;
-function preload() {
-  // Load the shader
-  shaderProgram = loadShader('background/background.vert', 'background/background.frag');
-}
-function windowResized() {
-    resizeCanvas(windowWidth, windowHeight); // Resize canvas when the window is resized
-}
-function setup() {
-    canvas = createCanvas(windowWidth, windowHeight, WEBGL);
-    canvas.parent('game-container');
-    window.addEventListener('scroll', () => {
-        // Normalize scroll value between 0 and 1
-        scrollValue = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-    });
-}
+const sketch = (p) => {
+  let shaderProgram;
+  let canvas;
+  let shaderLoadedFlag = false;
+  const scrollThreshold = 500; // Scroll threshold
 
-function draw() {
-  // Set the shader as the active shader
-  shader(shaderProgram);
-  shaderProgram.setUniform('u_resolution', [width, height]);
-  shaderProgram.setUniform('u_time', millis() / 1000.0); // Optional for animation
-  // Pass the mouse coordinates to the shader
-  shaderProgram.setUniform('u_mouse', [mouseX, mouseY]);
-  shaderProgram.setUniform('u_scroll', scrollValue);  // Pass the scroll value
-  // Draw a rectangle that covers the whole canvas
-  beginShape();
-  vertex(-1, -1, 0, 0);  // Bottom-left corner
-  vertex(1, -1, 1, 0);   // Bottom-right corner
-  vertex(1, 1, 1, 1);    // Top-right corner
-  vertex(-1, 1, 0, 1);   // Top-left corner
-  endShape(CLOSE);
-}
-window.preload = preload;
-window.setup = setup;
-window.draw = draw;
-window.windowResized = windowResized;
+  p.preload = () => {
+    // Load the shader and set a callback
+    shaderProgram = p.loadShader(
+      'background/background.vert',
+      'background/background.frag',
+      () => {
+        console.log('Shader loaded successfully');
+        console.log("this is inside the proload function");
+        shaderLoadedFlag = true; // Set the flag to true
+      },
+      (err) => {
+        console.error('Error loading shader:', err);
+      }
+    );
+    
+  };
+  
+
+  p.setup = () => {
+    canvas = p.createCanvas(p.windowWidth, p.windowHeight+8, p.WEBGL);
+    canvas.parent('background-container');
+
+    // Listen for scroll events to update the scroll value
+    window.addEventListener('scroll', handleScroll);
+  };
+
+  const handleScroll = () => {
+    // Use requestAnimationFrame for smooth performance
+    requestAnimationFrame(() => {
+      const gameContainer = document.getElementById('background-container');
+      if (window.scrollY < scrollThreshold) {
+        gameContainer.style.position = 'fixed';
+      } else {
+        gameContainer.style.position = 'absolute';
+      }
+    });
+  };
+
+  p.draw = () => {
+    if(shaderLoadedFlag){//fixes p5js race condition bug that I discovered
+      p.shader(shaderProgram);
+      shaderProgram.setUniform('u_resolution', [p.width, p.height]);
+      shaderProgram.setUniform('u_time', p.millis() / 1000.0);
+      shaderProgram.setUniform('u_mouse', [p.mouseX, p.mouseY]);
+  
+      p.beginShape();
+      p.vertex(-1, -1, 0, 0);  // Bottom-left corner
+      p.vertex(1, -1, 1, 0);   // Bottom-right corner
+      p.vertex(1, 1, 1, 1);    // Top-right corner
+      p.vertex(-1, 1, 0, 1);   // Top-left corner
+      p.endShape(p.CLOSE);
+    }
+  };
+
+  p.windowResized = () => {
+    p.resizeCanvas(p.windowWidth, p.windowHeight);
+  };
+};
+
+// Create a unique p5 instance
+const myP5 = new p5(sketch);
