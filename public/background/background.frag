@@ -13,8 +13,8 @@ void main() {
     vec2 c = (normalizedCoord - 0.5) * 2.0;
 
     // Correct for aspect ratio to prevent distortion
-    c.x *= u_resolution.x / u_resolution.y;
-    c.y *= u_resolution.y / u_resolution.x;
+    //c.x *= u_resolution.x / u_resolution.y;
+    //c.y *= u_resolution.y / u_resolution.x;
 
     // Define zoom level (scales the view) and volatility (controls intensity)
     float zoom = 10.0;
@@ -24,7 +24,7 @@ void main() {
     c *= zoom;
 
     // Define rotation angle (in radians, based on time to animate it)
-    float angle = u_scroll;  // Rotate over time
+    float angle = u_scroll/150.0;  // Rotate over time
     // 2D rotation matrix
     mat2 rotationMatrix = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
 

@@ -30,7 +30,9 @@
   </head>
   <body>
     <main>
-      
+      <div class="movingBackground col-12" id="background-tree"></div>
+      <div class="movingBackground col-12" id="background-roots"></div>
+      <div class="movingBackground col-12" id="background-container-fractal"></div>
       <div class="movingBackground col-12" id="background-container"></div>
       <div class="movingBackground col-12" id="background-container-two"></div>
       <!-- Include p5.js from node_modules -->
@@ -42,6 +44,9 @@
     </main>
 
     <!-- Your custom p5.js sketches -->
+    <script type="module" src="tree/tree.js"></script>
+    
+    <script type="module" src="fractal/fractal.js"></script>
     <script type="module" src="background/backgroundShader.js"></script>
     <script type="module" src="background/backgroundShaderCopy.js"></script>
     

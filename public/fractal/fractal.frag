@@ -1,59 +1,43 @@
 precision mediump float;
 
-uniform vec2 u_resolution; // Canvas resolution (width, height)
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
 uniform float u_time;
-uniform vec2 u_mouse; // Mouse position
-uniform float u_scroll; // User scroll position (0 to 1)
+
+// Higher-order Julia set function
+float julia(vec2 z, vec2 c, float power) {
+    for (float i = 0.0; i < 200.0; i++) {
+        if (dot(z, z) > 4.0) {
+            return i / 200.0;
+        }
+        float r = length(z);
+        float theta = atan(z.y, z.x);
+        z = pow(r, power) * vec2(cos(power * theta), sin(power * theta)) + c;
+    }
+    return 200.0;
+}
 
 void main() {
-    // Normalize fragment coordinates to [0, 1] range
-    vec2 normalizedCoord = gl_FragCoord.xy / u_resolution;
+ // Determine the size of the square area
+    float minRes = min(u_resolution.x, u_resolution.y);
+    
+    // Adjust UV coordinates to center the square in the canvas
+    vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / minRes;
 
-    // Adjust to center the coordinates around (0, 0), so we get the range [-1, 1]
-    vec2 c = (normalizedCoord - 0.5) * 2.0;
+    // Zoom factor
+    float zoom = 3.0;
+    uv *= zoom;
 
-    // Correct for aspect ratio to prevent distortion
-    c.x *= u_resolution.x / u_resolution.y;
-    c.y *= u_resolution.y / u_resolution.x;
+    // Dynamic constant 'c' controlled by mouse movement (adjusted to square area)
+    vec2 c = 0.8 * ((u_mouse - 0.5 * u_resolution) / minRes);
 
-    // Define zoom level (scales the view) and volatility (controls intensity)
-    float zoom = 10.0;
-    float volatility = 3.0;
+    // Julia fractal calculation with adjustable power
+    float power = 5.0;
+    float b = julia(uv, c, power);
 
-    // Apply zoom by scaling coordinates
-    c *= zoom;
-    // Calculate rotation angle, incorporating screen aspect ratio correction
-    float aspectRatio = u_resolution.x / u_resolution.y;
-    float angle = u_scroll + atan(1.0 / aspectRatio); // Rotate based on aspect ratio
+    // Map the iteration count to a grayscale value
+    float grayscale = b;
 
-    // 2D rotation matrix
-    mat2 rotationMatrix = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
-
-    // Apply rotation to the coordinates
-    c = rotationMatrix * c;
-
-    // Define the equation and parameters
-    vec2 z = c;
-
-    // zm(z, z) -> z * z (self-application as a squaring operation)
-    vec2 zm_z = z * z;
-
-    // Apply zm(z, zm(z, z)) -> z * zm_z (self-application with nested result)
-    vec2 zm_nested = zm_z * zm_z;
-
-    // za(z, c) -> zm_nested + c (combining the result with original c)
-    vec2 result = zm_nested + c;
-
-    // The resulting complex-like operation (just for illustration)
-    float magnitude = length(result); // Magnitude to control intensity
-
-    // Use a threshold to create contour lines or variation
-    float threshold = 0.1;
-    float value = abs(magnitude) - threshold;
-
-    // Define color based on the magnitude
-    vec3 color = vec3(sin(value * 10.0) * 0.5 + 0.5); // Visualize intensity using a color
-
-    // Output the final color
-    gl_FragColor = vec4(color, 1.0);
+    // Output the final color in grayscale
+    gl_FragColor = vec4(vec3(grayscale), 1.0);
 }
