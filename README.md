@@ -1,4 +1,3 @@
-In your terminal you need to navigate inside the "personal-site" folder and then run:
-node server.js
+This is mostly just a personal playground to experiment with webgl for the first time and to experiment with how you can incorporate p5js canvases into web design.
 
-The application should start running on localhost:3000
+I might eventually add content to this and make it a resume site.
