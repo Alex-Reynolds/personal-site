@@ -41,7 +41,7 @@ const rootSketch = (p) => {
     }
   
     p.windowResized = () => {
-      p.resizeCanvas(p.windowWidth, p.windowHeight);
+      p.resizeCanvas(p.windowWidth, (p.windowHeight/4)*3);
     };
   };
   // Create the p5 instance

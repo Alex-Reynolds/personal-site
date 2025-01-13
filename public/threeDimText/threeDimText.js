@@ -1,66 +1,46 @@
+const textSketch = (p) => {
+  let font;
+  let canvas;
+  /** 
+  let parentDiv = document.getElementById('threeDimText');
+  let rect = parentDiv.getBoundingClientRect();
+  let canvasWidth = rect.width;
+  let canvasHeight = rect.height;
+  */
 
-/** 
-let font;
+  p.preload = () => {
+      font = p.loadFont('threeDimText/Roboto-Regular.ttf'); // Preload the font
+  };
 
-function preload() {
-  font = loadFont('Staatliches-Regular.ttf'); // Preload the font. For 3D to work, we need a font file (not a linked font). 
-}
+  p.setup = () => {
+      canvas = p.createCanvas(250, 60, p.WEBGL);
+      canvas.parent('threeDimText');
+  };
 
+  p.draw = () => {
+      console.log("we in 3d text");
+      p.clear();
+      p.textFont(font);
+      p.textAlign(p.CENTER, p.CENTER);
+      p.textSize(30);
+      if(p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height){
+        p.rotateX(-p.map(p.mouseY-(p.height/2), 0, p.height, 0, p.TWO_PI/10));
+        p.rotateY(p.map(p.mouseX-(p.width/2), 0, p.width, 0, p.TWO_PI/10));
+        p.fill(252, 3, 127);
+      }else{
+        p.fill(0,0,0);
+      }
+      
+      p.push();
+      for (let i = 0; i < 25; i++) {
+          
+          p.translate(0, 0, 0.5);
+          p.text("Alex Reynolds", 0, 0);
+      }
+      p.pop();
+  };
 
-function setup() {
-  createCanvas(60,30,WEBGL);
-  background('#3C2350');
-}
-
-function draw() {
-  textFont(font);
-  textAlign(CENTER,CENTER);
-  textSize(50);
-  rotateX(map(mouseX,0,width,0,TWO_PI));
-  rotateY(map(mouseY,0,height,0,TWO_PI));
-  //rotateZ(map(frameCount,0,600,0,TWO_PI))
-  // fill('#8C53D5');
-  push();
-  for(let i=0; i<100; i++) {
-    fill(map(i,0,100,0,255),80,215);
-    translate(0,0,.5);
-    text("Alex\nReynolds",0,0);
-  }
-  pop();
-}
-
-
-window.preload = preload;
-window.setup = setup;
-window.draw = draw;
-
-*/
-
-function sketch1(p) {
-    p.setup = function () {
-      p.createCanvas(720, 200);
-      p.background(0);
-    };
-    p.draw = function () {
-      p.circle(p.mouseX, p.mouseY, 50);
-    };
-  }
-
-// Run first p5 instance
-new p5(sketch1);
-  
-  // Function for second canvas
-function sketch2(p) {
-p.setup = function () {
-    p.createCanvas(720, 200);
-    p.background(255);
-    p.fill(0);
-    p.stroke(255);
 };
-p.draw = function () {
-    p.square(p.mouseX, p.mouseY, 50);
-};
-}
 
-// Run second p5 instance
-new p5(sketch2);
+// Create the p5 instance
+const textP5 = new p5(textSketch);

@@ -18,6 +18,10 @@ const treeSketch = (p) => {
     function branch(len) {
       p.push();
       if (len > 10) {
+        let slant = p.random(-45,45);
+        if(len > 90){
+          p.rotate(slant);
+        }
         p.strokeWeight(p.map(len, 10, 100, 1, 30));
         p.stroke(250, 250, 250);
         p.noFill();
@@ -29,6 +33,9 @@ const treeSketch = (p) => {
         p.endShape();
         p.translate(0, -len);
         p.rotate(p.random(-20, -30));
+        if(len > 90){
+          p.rotate(-slant);
+        }
         branch(len * p.random(0.7, 0.9));
         p.rotate(p.random(50, 60));
         branch(len * p.random(0.7, 0.9));
@@ -41,15 +48,15 @@ const treeSketch = (p) => {
     }
   
     p.windowResized = () => {
-      p.resizeCanvas(p.windowWidth, p.windowHeight);
+      p.resizeCanvas(p.windowWidth, (p.windowHeight/4)*3);
     };
   };
   
 
   function genFlower(p){
-    let r = 220 + p.random(-20, 20);  // High red for pink
-    let g = 100 + p.random(-30, 30);  // Lower green for softness
-    let b = 150 + p.random(-30, 30);  // Moderate blue for pink hue
+    let r = 220 + p.random(-10, 20);  // High red for pink
+    let g = 120 + p.random(-10, 30);  // Lower green for softness
+    let b = 160 + p.random(-10, 30);  // Moderate blue for pink hue
     p.strokeWeight(1);
     let randAngle = p.random(0,360);
     p.rotate(randAngle);

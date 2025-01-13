@@ -47,7 +47,9 @@ const sketch = (p) => {
       p.shader(shaderProgram);
       shaderProgram.setUniform('u_resolution', [p.width, p.height]);
       shaderProgram.setUniform('u_time', p.millis() / 1000.0);
-      shaderProgram.setUniform('u_mouse', [p.mouseX, p.mouseY]);
+      
+      shaderProgram.setUniform('u_scroll', window.scrollY);
+
   
       p.beginShape();
       p.vertex(-1, -1, 0, 0);  // Bottom-left corner

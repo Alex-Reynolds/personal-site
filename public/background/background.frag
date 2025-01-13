@@ -24,7 +24,7 @@ void main() {
     c *= zoom;
 
     // Define rotation angle (in radians, based on time to animate it)
-    float angle = 0.80;  // Rotate over time
+    float angle = 3.1;  // Rotate over time
     // 2D rotation matrix
     mat2 rotationMatrix = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
 

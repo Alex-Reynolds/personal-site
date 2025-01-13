@@ -29,20 +29,92 @@
     </style>
   </head>
   <body>
-    <main>
-      <div class="movingBackground col-12" id="background-tree"></div>
-      <div class="movingBackground col-12" id="background-roots"></div>
-      <div class="movingBackground col-12" id="background-container-fractal"></div>
-      <div class="movingBackground col-12" id="background-container-two"></div>
+    <main style="min-height: 355vh;">
+      <!--Navbar-->
+      <nav id="nav" class="float-nav navbar navbar-expand-lg p-0">
+        <div class="container-md d-flex justify-content-between align-items-center">
+          <a href="#home" class="d-flex justify-content-center align-items-center mb-1 navbar-brand">
+            <div class="match-height" 
+            id="threeDimText"></div>
+          </a>
+          
+          <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <div id="navbarSupportedContent" class="collapse navbar-collapse justify-content-end align-items-center pr-3">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="item nav-link p-0" href="#about">
+                  <b>
+                    <p>My Roots</p>
+                  </b>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="item nav-link p-0" href="#work">
+                  <p>Technology Experience</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="item nav-link p-0" href="#artworks">
+                  <p>Personal Hobbies</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+      <!--End Navbar-->
+
+      <!--Backgrounds-->
+      <div class="movingBackground" id="movingBackground">
+        <div class=" col-12" id="background-tree"></div>
+        <div class=" col-12" id="background-roots"></div>
+        <div class=" col-12" id="background-container-fractal"></div>
+        <div class=" col-12" id="background-container-two"></div>
+      </div>
+      <!--End Backgrounds-->
+
+      <!-- content -->
+      <div class="content-wrapper container-md pt-5 scrollFix">
+        <div class="growth-wrapper">
+          <div class="container-fluid padbig" id="home">
+            <div class="col mx-auto">
+              <div class="row intro">
+                <div
+                  class="col-sm-7 col-md-7"
+                  style="z-index: 1"
+                >
+                  <h4 class="fade-up fade-in white black-bg" style="margin-bottom:0;">Hi! I'm</h4>
+                  <h1 class="display-1 title fade-up fade-in pink black-bg"><b>Alex Reynolds</b></h1>
+                  <h4 class="fade-up fade-in white black-bg">
+                    I'm a
+                    full stack developer, with a focus on <u>GROWTH</u> mindset and being well rounded.<br> I excel at solving complex problems and engineering novel systems :)
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- END CONTENT -->
+
       <!-- Include p5.js from node_modules -->
-      <script src="/node_modules/p5/lib/p5.min.js"></script>
-      <script src="/node_modules/p5/lib/addons/p5.sound.min.js"></script>
+
+
+      <!-- Include statements-->
+      <script src="https://cdn.jsdelivr.net/npm/p5@1.11.2/lib/p5.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
       crossorigin="anonymous"></script>
     </main>
 
     <!-- Your custom p5.js sketches -->
+    <script type="module" src="scrollBackground.js"></script>
+    <script type="module" src="threeDimText/threeDimText.js"></script>
     <script type="module" src="tree/tree.js"></script>
     <script type="module" src="roots/roots.js"></script>
     <script type="module" src="fractal/fractal.js"></script>

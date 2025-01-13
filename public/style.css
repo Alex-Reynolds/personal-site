@@ -5,11 +5,16 @@ html, body {
   height: 100%;
 }
 
+.content-wrapper {
+  position: relative !important;
+  z-index: 1;
+}
+
 .movingBackground {
-  position: static !important;
+  position: fixed !important;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Place the canvas behind other elements */
+  z-index: -999; /* Place the canvas behind other elements */
 }
 .image-wrapper {
   width: 100%;
@@ -21,6 +26,82 @@ html, body {
 div {
   line-height: 0;
 }
+
+h1 {
+  font-weight: 500;
+}
+
+.match-height {
+  height: 100% !important;    
+  width: 100px !important;   
+  padding: 0 !important;     
+  margin: 0 !important;       
+  box-sizing: border-box !important;  
+}
+
+.hr {
+  list-style: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 18px;
+  box-sizing: border-box;
+  color: inherit;
+  opacity: 1;
+  border: 1px solid transparent;
+  width: 0%;
+  margin: 20px auto 0;
+  border-radius: 200px;
+  transition: all .2s ease;
+}
+.fade-up {
+  opacity: 0;
+  transform: translateY(3rem);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.white {
+  color:white;
+}
+
+.scrollFix {
+  min-height: 100vh;
+}
+
+.white_bg 
+{
+    background-color: #ffffff;
+    padding: 3px; /*add this if you want a bit of space around the text*/
+}
+
+.black {
+  color:black;
+}
+
+.black-bg {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 3px; /*add this if you want a bit of space around the text*/
+  border-radius: 1em;
+}
+
+.pink {
+  color:#fc037f;
+}
+
+.fade-up.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-up.longer {
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.fade-left {
+  opacity: 0;
+  transform: translateX(3rem);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
 .nav-link {
   list-style: none;
   box-sizing: border-box;
@@ -44,19 +125,16 @@ div {
   display: block;
   background: none;
   border: 0;
-  padding: 0!important;
+  margin-bottom:3px !important;
   --bs-link-color-rgb: var(--bs-link-hover-color-rgb);
-  text-decoration: none;
-  cursor: pointer;
-  margin: 25px 20px 0;
   background-color: transparent;
   transition: all .2s ease;
-  font-weight: 500;
-  font-size: 18px;
-  color: #c08261;
+  color: #fc037f !important;
+
 }
 
 .navbar {
+  height: 60px;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
@@ -73,24 +151,10 @@ div {
   
 }
 
-
-
-.hr {
-  list-style: none;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 18px;
-  box-sizing: border-box;
-  color: inherit;
+.fade-left.fade-in {
   opacity: 1;
-  border: 1px solid transparent;
-  width: 0%;
-  margin: 20px auto 0;
-  border-radius: 200px;
-  transition: all .2s ease;
+  transform: translateX(0);
 }
-
-
 
 .content-card {
   max-height: 40vh;

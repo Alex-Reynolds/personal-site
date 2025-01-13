@@ -25,21 +25,6 @@ const sketch = (p) => {
   p.setup = () => {
     canvas = p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
     canvas.parent('background-container-two');
-
-    // Listen for scroll events to update the scroll value
-    window.addEventListener('scroll', handleScroll);
-  };
-
-  const handleScroll = () => {
-    // Use requestAnimationFrame for smooth performance
-    requestAnimationFrame(() => {
-      const gameContainer = document.getElementById('background-container-two');
-      if (window.scrollY < scrollThreshold) {
-        gameContainer.style.position = 'fixed';
-      } else {
-        gameContainer.style.position = 'absolute';
-      }
-    });
   };
 
   p.draw = () => {
