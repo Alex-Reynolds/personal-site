@@ -10,6 +10,10 @@ html, body {
   z-index: 1;
 }
 
+.growth-wrapper {
+  height:80vh;
+}
+
 .movingBackground {
   position: fixed !important;
   width: 100%;
