@@ -23,7 +23,7 @@ const sketch = (p) => {//this is an instnace mode setup for p5js
   
 
   p.setup = () => {
-    canvas = p.createCanvas(p.windowWidth, p.windowHeight+8, p.WEBGL);
+    canvas = p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
     canvas.parent('background-container-fractal');
 
     // Listen for scroll events to update the scroll value

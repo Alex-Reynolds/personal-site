@@ -25,11 +25,11 @@ void main() {
     vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / minRes;
 
     // Zoom factor
-    float zoom = 3.0;
+    float zoom = 5.0;
     uv *= zoom;
 
     // Dynamic constant 'c' controlled by mouse movement (adjusted to square area)
-    vec2 c = 0.8 * ((u_mouse - 0.5 * u_resolution) / minRes);
+    vec2 c = 1.2 * ((u_mouse - 0.5 * u_resolution) / minRes);
 
     // Julia fractal calculation with adjustable power
     float power = 5.0;

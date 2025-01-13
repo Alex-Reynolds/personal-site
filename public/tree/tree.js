@@ -1,24 +1,32 @@
 const treeSketch = (p) => {
     let canvas;
     p.setup = () => {
-      canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+      canvas = p.createCanvas(p.windowWidth, (p.windowHeight/4)*3);
       canvas.parent('background-tree');
       p.angleMode(p.DEGREES);
       p.noLoop();
     };
   
     p.draw = () => {
+      
       p.background(0);
-      p.translate(p.width / 2, p.height / 2 + 200);
+      p.translate(p.width / 2, p.height);
+      p.scale(p.height/800);
       branch(100);
     };
   
     function branch(len) {
       p.push();
       if (len > 10) {
-        p.strokeWeight(p.map(len, 10, 100, 1, 15));
+        p.strokeWeight(p.map(len, 10, 100, 1, 30));
         p.stroke(250, 250, 250);
-        p.line(0, 0, 0, -len);
+        p.noFill();
+        p.beginShape();
+        p.vertex(0,0);
+        let curve = p.random(2,4);
+        let direction = p.random(-1,1);
+        p.bezierVertex((-len/curve)*direction, -len/4, (-len/curve)*direction, (-len - (-len/curve)), 0, -len);
+        p.endShape();
         p.translate(0, -len);
         p.rotate(p.random(-20, -30));
         branch(len * p.random(0.7, 0.9));
@@ -42,10 +50,10 @@ const treeSketch = (p) => {
     let r = 220 + p.random(-20, 20);  // High red for pink
     let g = 100 + p.random(-30, 30);  // Lower green for softness
     let b = 150 + p.random(-30, 30);  // Moderate blue for pink hue
-    p.strokeWeight(3);
+    p.strokeWeight(1);
     let randAngle = p.random(0,360);
     p.rotate(randAngle);
-    let randDist = p.random(0,10);
+    let randDist = p.random(2,4);
     p.line(0,0,0,randDist);
     p.translate(0, randDist);
 
@@ -54,7 +62,9 @@ const treeSketch = (p) => {
 
     
     for (let i = 0; i < 5; i += 1) {
-        p.ellipse(0, 0, 20, 5);
+        p.translate(0,5);
+        p.ellipse(0, 0, 5, 10);
+        p.translate(0,-5);
         p.rotate(72);
     }
     p.rotate(180);
