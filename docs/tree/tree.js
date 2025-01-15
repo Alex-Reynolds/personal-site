@@ -1,6 +1,11 @@
 const treeSketch = (p) => {
     let canvas;
+    let myButton;
     p.setup = () => {
+      myButton = document.getElementById('reload-tree');
+      myButton.addEventListener('click', () => {
+        treeP5.redraw();
+      });
       canvas = p.createCanvas(p.windowWidth, (p.windowHeight/4)*3);
       canvas.parent('background-tree');
       p.angleMode(p.DEGREES);

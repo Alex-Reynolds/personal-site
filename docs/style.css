@@ -171,3 +171,14 @@ h1 {
   object-fit: cover; /* Crop the image to cover the area without distorting */
   border-radius: 10px; /* Smooth corners */
 }
+
+.btn-pink {
+  background-color: #ff69b4!important; /* Hot Pink */
+  color: white!important;
+  border: none;
+  border-radius: 50px!important;
+}
+
+.btn-pink:hover {
+  background-color: #ff1493!important; /* Deeper Pink on hover */
+}

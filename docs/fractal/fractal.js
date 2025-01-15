@@ -2,6 +2,8 @@ const sketch = (p) => {//this is an instnace mode setup for p5js
   let shaderProgram;
   let canvas;
   let shaderLoadedFlag = false;
+  let offset = { x: 0, y: 0 };
+  let zoom = 5.0;
   const scrollThreshold = 500; // Scroll threshold
 
   p.preload = () => {
@@ -29,11 +31,48 @@ const sketch = (p) => {//this is an instnace mode setup for p5js
 
   p.draw = () => {
     if(shaderLoadedFlag){//fixes p5js race condition bug that I discovered
+      //controls
+        // W key (move up)
+      if (p.keyIsDown(87)) { // 87 is the keyCode for 'W'
+        offset.y-=.001;
+      }
+
+      // A key (move left)
+      if (p.keyIsDown(65)) { // 65 is the keyCode for 'A'
+        offset.x+=.001;
+      }
+
+      // S key (move down)
+      if (p.keyIsDown(83)) { // 83 is the keyCode for 'S'
+        offset.y+=.001;
+      }
+
+      // D key (move right)
+      if (p.keyIsDown(68)) { // 68 is the keyCode for 'D'
+        offset.x-=.001;
+      }
+
+      if (p.keyIsDown(69)) { //e
+        zoom -= .01;
+      }
+
+      if (p.keyIsDown(81)) { //q
+        zoom += .01;
+      }
+
+      if (p.keyIsDown(82)) { // 82 is the keyCode for 'R'
+        offset.x = 0;
+        offset.y = 0;
+        zoom = 5;
+      }
+
       p.shader(shaderProgram);
       shaderProgram.setUniform('u_resolution', [p.width, p.height]);
       shaderProgram.setUniform('u_time', p.millis() / 1000.0);
       shaderProgram.setUniform('u_mouse', [p.mouseX, p.mouseY]);
-
+      shaderProgram.setUniform('u_offset', [offset.x, offset.y]);
+      shaderProgram.setUniform('u_zoom', zoom);
+      
   
       p.beginShape();
       p.vertex(-1, -1, 0, 0);  // Bottom-left corner

@@ -1,6 +1,11 @@
 const rootSketch = (p) => {
     let canvas;
+    let myButton;
     p.setup = () => {
+      myButton = document.getElementById('reload-tree');
+      myButton.addEventListener('click', () => {
+        rootP5.redraw();
+      });
       canvas = p.createCanvas(p.windowWidth, (p.windowHeight/4)*3);
       canvas.parent('background-roots');
       p.angleMode(p.DEGREES);

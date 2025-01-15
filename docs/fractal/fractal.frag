@@ -3,6 +3,8 @@ precision mediump float;
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
+uniform vec2 u_offset;
+uniform float u_zoom;
 
 // Higher-order Julia set function
 float julia(vec2 z, vec2 c, float power) {
@@ -24,8 +26,12 @@ void main() {
     // Adjust UV coordinates to center the square in the canvas
     vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / minRes;
 
+    // Optional panning
+    vec2 offset = u_offset;
+    uv += offset;
+
     // Zoom factor
-    float zoom = 5.0;
+    float zoom = u_zoom;
     uv *= zoom;
 
     // Dynamic constant 'c' controlled by mouse movement (adjusted to square area)
