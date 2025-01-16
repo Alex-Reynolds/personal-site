@@ -74,6 +74,7 @@ const sketch = (p) => {//this is an instnace mode setup for p5js
       shaderProgram.setUniform('u_time', p.millis() / 1000.0);
 
       if(p.mouseIsPressed){//this is probably an overcomplicated way to do this but this was first idea I had
+        console.log("fractal should be working");
         let mousexDif = 0;
         let mouseyDif = 0;
         if(clicked){
