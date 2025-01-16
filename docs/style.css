@@ -182,3 +182,16 @@ h1 {
 .btn-pink:hover {
   background-color: #ff1493!important; /* Deeper Pink on hover */
 }
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  height: 100%; /* Ensures it fills the parent height */
+  padding: 0; /* Removes extra padding */
+}
+
+.nav-link p {
+  margin: 0; /* Removes extra margin */
+  display: flex;
+  align-items: center;
+}

@@ -3,9 +3,11 @@ const sketch = (p) => {//this is an instnace mode setup for p5js
   let canvas;
   let shaderLoadedFlag = false;
   let offset = { x: 0, y: 0 };
-  let zoom = 5.0;
+  let zoom = 0.5;
   const scrollThreshold = 500; // Scroll threshold
-
+  let uMousePos = { x:0, y: 0};
+  let prevMousePos = { x:0, y: 0};
+  var clicked = false;
   p.preload = () => {
     // Load the shader and set a callback
     shaderProgram = p.loadShader(
@@ -34,45 +36,62 @@ const sketch = (p) => {//this is an instnace mode setup for p5js
       //controls
         // W key (move up)
       if (p.keyIsDown(87)) { // 87 is the keyCode for 'W'
-        offset.y-=.001;
+        offset.y+=.003/zoom;
       }
 
       // A key (move left)
       if (p.keyIsDown(65)) { // 65 is the keyCode for 'A'
-        offset.x+=.001;
+        offset.x-=.003/zoom;
       }
 
       // S key (move down)
       if (p.keyIsDown(83)) { // 83 is the keyCode for 'S'
-        offset.y+=.001;
+        offset.y-=.003/zoom;
       }
 
       // D key (move right)
       if (p.keyIsDown(68)) { // 68 is the keyCode for 'D'
-        offset.x-=.001;
+        offset.x+=.003/zoom;
       }
-
+      let zoomSpeed = 0.03;
       if (p.keyIsDown(69)) { //e
-        zoom -= .01;
+        zoom += zoomSpeed*zoom;//this zooms in
       }
 
       if (p.keyIsDown(81)) { //q
-        zoom += .01;
+        zoom -= zoomSpeed*zoom; //this zooms out
       }
 
       if (p.keyIsDown(82)) { // 82 is the keyCode for 'R'
         offset.x = 0;
         offset.y = 0;
-        zoom = 5;
+        zoom = 0.5;
+        uMousePos = { x:0, y:0};
       }
 
       p.shader(shaderProgram);
       shaderProgram.setUniform('u_resolution', [p.width, p.height]);
       shaderProgram.setUniform('u_time', p.millis() / 1000.0);
-      shaderProgram.setUniform('u_mouse', [p.mouseX, p.mouseY]);
+
+      if(p.mouseIsPressed){//this is probably an overcomplicated way to do this but this was first idea I had
+        let mousexDif = 0;
+        let mouseyDif = 0;
+        if(clicked){
+          mousexDif = p.mouseX - prevMousePos.x;
+          mouseyDif = p.mouseY - prevMousePos.y;
+        }
+        uMousePos.x += mousexDif;
+        uMousePos.y += mouseyDif;
+        prevMousePos.x = p.mouseX;
+        prevMousePos.y = p.mouseY;
+        clicked = true;
+      }else{
+        clicked = false;
+      }
+      shaderProgram.setUniform('u_mouse', [uMousePos.x, uMousePos.y]);
       shaderProgram.setUniform('u_offset', [offset.x, offset.y]);
       shaderProgram.setUniform('u_zoom', zoom);
-      
+      shaderProgram.setUniform('u_steps', 50);
   
       p.beginShape();
       p.vertex(-1, -1, 0, 0);  // Bottom-left corner
