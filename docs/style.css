@@ -1,3 +1,4 @@
+/* Global Styles */
 html, body {
   margin: 0;
   padding: 0;
@@ -5,28 +6,6 @@ html, body {
   height: 100%;
 }
 
-.content-wrapper {
-  position: relative !important;
-  z-index: 1;
-}
-
-.growth-wrapper {
-  height:80vh;
-}
-
-.movingBackground {
-  position: fixed !important;
-  width: 100%;
-  height: 100%;
-  z-index: -999; /* Place the canvas behind other elements */
-}
-.image-wrapper {
-  width: 100%;
-  height: 100%; /* Set a fixed height for the image container */
-  overflow: hidden; /* Hide overflow */
-  padding: 15px; /* Add padding around the image */
-  box-sizing: border-box; /* Include padding in the width and height calculations */
-}
 div {
   line-height: 0;
 }
@@ -35,60 +14,141 @@ h1 {
   font-weight: 500;
 }
 
-.match-height {
-  height: 100% !important;    
-  width: 100px !important;   
-  padding: 0 !important;     
-  margin: 0 !important;       
-  box-sizing: border-box !important;  
+/* Layout Wrappers */
+.content-wrapper {
+  position: relative !important;
+  z-index: 1;
 }
 
-.hr {
-  list-style: none;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 18px;
-  box-sizing: border-box;
-  color: inherit;
-  opacity: 1;
-  border: 1px solid transparent;
-  width: 0%;
-  margin: 20px auto 0;
-  border-radius: 200px;
-  transition: all .2s ease;
-}
-.fade-up {
-  opacity: 0;
-  transform: translateY(3rem);
-  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
-}
-
-.white {
-  color:white;
+.growth-wrapper {
+  height: 80vh;
 }
 
 .scrollFix {
   min-height: 100vh;
 }
 
-.white_bg 
-{
-    background-color: #ffffff;
-    padding: 3px; /*add this if you want a bit of space around the text*/
+/* Backgrounds */
+.movingBackground {
+  position: fixed !important;
+  width: 100%;
+  height: 100%;
+  z-index: -999;
 }
 
-.black {
-  color:black;
+.white_bg {
+  background-color: #ffffff;
+  padding: 3px;
 }
 
 .black-bg {
   background-color: rgba(0, 0, 0, 0.7);
-  padding: 3px; /*add this if you want a bit of space around the text*/
+  padding: 3px;
   border-radius: 1em;
 }
 
+/* Color Classes */
+.white {
+  color: white;
+}
+
+.black {
+  color: black;
+}
+
 .pink {
-  color:#fc037f;
+  color: #fc037f;
+}
+
+/* Image Styling */
+.image-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.profile-image,
+.content-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Buttons */
+.btn-pink {
+  background-color: #ff69b4 !important;
+  color: white !important;
+  border: none;
+  border-radius: 50px !important;
+}
+
+.btn-pink:hover {
+  background-color: #ff1493 !important;
+}
+
+/* Navbar */
+.navbar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding: 0 !important;
+  position: sticky !important;
+  z-index: 9999;
+  left: 0;
+  right: 0;
+  background-color: #dbd8d580;
+  transition: top .3s ease;
+  backdrop-filter: blur(30px);
+  top: 0px;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  list-style: none;
+  box-sizing: border-box;
+  display: block;
+  background: none;
+  border: 0;
+  padding: 0 !important;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0 20px;
+  background-color: transparent;
+  transition: all .2s ease;
+  color: #393f49;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 60px;
+}
+
+.nav-link:hover {
+  color: #fc037f !important;
+  margin-bottom: 3px !important;
+}
+
+.nav-link p {
+  margin: 0;
+}
+
+/* Animation Effects */
+.fade-up {
+  opacity: 0;
+  transform: translateY(3rem);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
 }
 
 .fade-up.fade-in {
@@ -106,92 +166,35 @@ h1 {
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
-.nav-link {
-  list-style: none;
-  box-sizing: border-box;
-  display: block;
-  background: none;
-  border: 0;
-  padding: 0!important;
-  text-decoration: none;
-  cursor: pointer;
-  margin: 25px 20px 0;
-  background-color: transparent;
-  transition: all .2s ease;
-  color: #393f49;
-  font-weight: 500;
-  font-size: 18px;
-}
-
-.nav-link:hover {
-  list-style: none;
-  box-sizing: border-box;
-  display: block;
-  background: none;
-  border: 0;
-  margin-bottom:3px !important;
-  --bs-link-color-rgb: var(--bs-link-hover-color-rgb);
-  background-color: transparent;
-  transition: all .2s ease;
-  color: #fc037f !important;
-
-}
-
-.navbar {
-  height: 60px;
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  padding: 0!important;
-  position: sticky !important;
-  z-index: 9999;
-  left: 0;
-  right: 0;
-  background-color: #dbd8d580;
-  transition: top .3s ease;
-  backdrop-filter: blur(30px);
-  top: 0px;
-  
-}
-
 .fade-left.fade-in {
   opacity: 1;
   transform: translateX(0);
 }
 
+/* Miscellaneous */
+.match-height {
+  height: 100% !important;
+  width: 100px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.hr {
+  list-style: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 18px;
+  box-sizing: border-box;
+  color: inherit;
+  opacity: 1;
+  border: 1px solid transparent;
+  width: 0%;
+  margin: 20px auto 0;
+  border-radius: 200px;
+  transition: all .2s ease;
+}
+
 .content-card {
   max-height: 40vh;
-}
-
-.profile-image,
-.content-image {
-  width: 150px; /* Set a fixed width */
-  height: 150px; /* Set a fixed height */
-  object-fit: cover; /* Crop the image to cover the area without distorting */
-  border-radius: 10px; /* Smooth corners */
-}
-
-.btn-pink {
-  background-color: #ff69b4!important; /* Hot Pink */
-  color: white!important;
-  border: none;
-  border-radius: 50px!important;
-}
-
-.btn-pink:hover {
-  background-color: #ff1493!important; /* Deeper Pink on hover */
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  height: 100%; /* Ensures it fills the parent height */
-  padding: 0; /* Removes extra padding */
-}
-
-.nav-link p {
-  margin: 0; /* Removes extra margin */
-  display: flex;
-  align-items: center;
 }
